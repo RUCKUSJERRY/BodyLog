@@ -8,7 +8,6 @@ public class CommunityBoardDto {
 	private int com_num;
 	private int member_num;
 	private String board_title;
-	private String member_name;
 	private String member_id;
 	private String member_nickname;
 	private String board_content;
@@ -18,13 +17,12 @@ public class CommunityBoardDto {
 		
 	}
 	
-	public CommunityBoardDto(int board_num, int com_num, int member_num, String board_title, String member_name,
+	public CommunityBoardDto(int board_num, int com_num, int member_num, String board_title,
 			String member_id, String member_nickname, String board_content, Date board_date) {
 		this.board_num = board_num;
 		this.com_num = com_num;
 		this.member_num = member_num;
 		this.board_title = board_title;
-		this.member_name = member_name;
 		this.member_id = member_id;
 		this.member_nickname = member_nickname;
 		this.board_content = board_content;
@@ -62,14 +60,6 @@ public class CommunityBoardDto {
 
 	public void setBoard_title(String board_title) {
 		this.board_title = board_title;
-	}
-
-	public String getMember_name() {
-		return member_name;
-	}
-
-	public void setMember_name(String member_name) {
-		this.member_name = member_name;
 	}
 
 	public String getMember_id() {

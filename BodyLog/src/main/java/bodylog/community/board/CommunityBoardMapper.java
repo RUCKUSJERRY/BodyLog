@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Update;
 @Mapper
 public interface CommunityBoardMapper {
 
-	@Select("")
+	@Select(" SELECT BOARD_NUM, COM_NUM, MEMBER_NUM, BOARD_TITLE, MEMBER_ID, MEMBER_NICKNAME, BOARD_CONTENT, BOARD_DATE, BOARD_TAG FROM COMBOARD ORDER BY BOARD_NUM DESC ")
 	List<CommunityBoardDto> selectListCommunityBoard();
 	
 	@Select("")
