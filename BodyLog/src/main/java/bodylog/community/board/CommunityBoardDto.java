@@ -1,7 +1,5 @@
 package bodylog.community.board;
 
-import java.util.Date;
-
 public class CommunityBoardDto {
 
 	private int board_num;
@@ -11,14 +9,14 @@ public class CommunityBoardDto {
 	private String member_id;
 	private String member_nickname;
 	private String board_content;
-	private Date board_date;
+	private String board_date;
 	
 	public CommunityBoardDto() {
 		
 	}
 	
 	public CommunityBoardDto(int board_num, int com_num, int member_num, String board_title,
-			String member_id, String member_nickname, String board_content, Date board_date) {
+			String member_id, String member_nickname, String board_content, String board_date) {
 		this.board_num = board_num;
 		this.com_num = com_num;
 		this.member_num = member_num;
@@ -86,11 +84,11 @@ public class CommunityBoardDto {
 		this.board_content = board_content;
 	}
 
-	public Date getBoard_date() {
+	public String getBoard_date() {
 		return board_date;
 	}
 
-	public void setBoard_date(Date board_date) {
+	public void setBoard_date(String board_date) {
 		this.board_date = board_date;
 	}
 	
