@@ -1,13 +1,16 @@
 package bodylog.community.controller;
 
-import java.util.List;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.google.gson.Gson;
 
@@ -29,6 +32,7 @@ public class CommunityController {
 	//@Autowired
 	//private CommunityBoardCommentBiz comBoardCommentBiz;
 	
+	// 커뮤니티 메인 접속시
 	@GetMapping("/main")
 	public String communityMain(Model model) {
 		System.out.println("community-main");
@@ -42,6 +46,7 @@ public class CommunityController {
 		return "";
 	}
 	
+	// 모든 커뮤니티의 게시글 리스팅
 	@PostMapping("/selectListAllBoard")
 	public String selectListAllBoard(Model model) {
 		System.out.println("selectListAllBoard");	
@@ -52,6 +57,7 @@ public class CommunityController {
 		
 	}
 	
+	// 1개 커뮤니티의 게시글 리스팅
 	@PostMapping("/selectListBoard")
 	public String selectListBoard(Model model, int com_num) {
 		System.out.println("selectListBoard");	
@@ -62,6 +68,7 @@ public class CommunityController {
 		
 	}
 	
+	// 1개의 게시글 SELECT
 	@PostMapping("/selectOneBoard")
 	public String selectOneBoard(Model model, int board_num) {
 		System.out.println("selectOneBoard");	
@@ -74,6 +81,7 @@ public class CommunityController {
 		
 	}
 	
+	// 게시글 UPDATE 모달
 	@PostMapping("/updateBoard")
 	public String updateBoard(Model model, int board_num) {
 		System.out.println("updateBoard");
@@ -85,6 +93,34 @@ public class CommunityController {
 		return "community-main :: #boardupdate";
 		
 	}
+	
+	// 게시글 UPDATE RES
+	@PostMapping("/updateBoardRes")
+	public String updateBoardRes(Model model, 
+			int board_num, int com_num, int member_num, 
+			String board_title, String member_nickname, String member_id, String board_content, @RequestParam("board_date") Date board_date) {
+		System.out.println("updateBoardRes");
+		
+		CommunityBoardDto dto = new CommunityBoardDto(board_num, com_num, member_num, board_title, member_nickname, member_id, board_content, board_date);
+		Date date = new Date();
+		
+		int res = comBoardBiz.updateCommunityBoard(dto);
+		
+		if (res > 0) {
+			model.addAttribute("dto", comBoardBiz.selectOneCommunityBoard(board_num));
+			
+			return "community-main :: #boarddetail";
+			
+		} else {
+			return "community-main";
+		}
+		
+		
+		
+		
+		
+	}
+	
 	
 }
 

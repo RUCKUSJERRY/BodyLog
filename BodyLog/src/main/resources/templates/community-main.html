@@ -83,6 +83,52 @@
 		})
 	}
 	
+	// 게시글 수정 제출
+	function updateBoardRes() {
+		
+		function getParameterValues() {
+			
+			var board_num = $("#update_board_num").val();
+			var com_num = $("#update_com_num").val();
+			var member_num = $("#update_member_num").val();
+			var board_title = $("#update_board_title").val();
+			var member_nickname = $("#update_member_nickname").val(); 
+			var member_id = $("#update_member_id").val();
+			var board_content = $("#update_board_content").val(); 
+			var board_date = $("#update_board_date").val();
+			
+			
+			return "?board_num="+board_num+
+				   "&com_num="+com_num+
+				   "&member_num="+member_num+
+				   "&board_title="+board_title+
+				   "&member_nickname="+member_nickname+
+				   "&member_id="+member_id+
+				   "&board_content="+board_content+
+				   "&board_date="+board_date
+				   
+		}
+		
+		
+		
+		$.ajax({
+			
+			url : "updateBoardRes"+getParameterValues(),
+			contentType: "application/json; charset=utf-8",
+			method : "POST",
+			success:function(data) {
+				alert("수정완료")
+				$("#boarddetail").replaceWith(data);
+				console.log(data)
+			},error: function(e) {
+				alert("수정실패")
+				console.log(e)
+			}
+			
+		})		
+	}
+	
+	
 	
 	// 게시글 삭제
 	function deleteBoard(board_num) {
@@ -175,16 +221,16 @@
 			<form action="updateboardres" method="post">
 			
 			<div th:object="${dto}">
-				<input type="text" th:value="${dto?.board_num}">
-				<input type="text" th:value="${dto?.com_num}">
-				<input type="text" th:value="${dto?.member_num}">
-				<input type="text" th:value="${dto?.board_title}">
-				<input type="text" th:value="${dto?.member_nickname}">
-				<input type="text" th:value="${dto?.member_id}">
-				<input type="text" th:value="${dto?.board_content}">
-				<input type="text" th:value="${dto?.board_date}">
-				<input type="button" value="수정하기" onclick="">
-				<input type="button" value="삭제하기" onclick="">
+				<input type="text" id="update_board_num" th:value="${dto?.board_num}">
+				<input type="text" id="update_com_num" th:value="${dto?.com_num}">
+				<input type="text" id="update_member_num" th:value="${dto?.member_num}">
+				<input type="text" id="update_board_title" th:value="${dto?.board_title}">
+				<input type="text" id="update_member_nickname" th:value="${dto?.member_nickname}">
+				<input type="text" id="update_member_id" th:value="${dto?.member_id}">
+				<input type="text" id="update_board_content" th:value="${dto?.board_content}">
+				<input type="text" id="update_board_date" th:value="${dto?.board_date}">
+				<input type="button" value="수정하기" th:onclick="|updateBoardRes();|">
+				<input type="button" value="삭제하기" th:onclick="|deleteBoard(${dto?.board_num});|">
 			</div>
 				
 			</form>

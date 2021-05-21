@@ -23,7 +23,11 @@ public interface CommunityBoardMapper {
 	@Insert("")
 	int insertCommunityBoard(CommunityBoardDto dto);
 	
-	@Update("")
+	@Update(" UPDATE COMBOARD SET "
+			+ " BOARD_TITLE = #{board_title} "
+			+ " BOARD_CONTENT = #{board_content} "
+			+ " WHERE BOARD_NUM = #{board_num} "
+			+ " AND MEMBER_NUM = #{member_num} ")
 	int updateCommunityBoard(CommunityBoardDto dto);
 	
 	@Delete("")
