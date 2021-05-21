@@ -1,12 +1,244 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+	// 우선 커뮤니티 메인을 접속하면 게시글 전체를 리스팅 해준다.
+	$(function(){
+		
+		selectListAllBoard();
+		
+	})
+	// 전체 게시판 리스트 호츌
+	function selectListAllBoard() {
+	
+		$.ajax({
+			
+			url : "selectListAllBoard",
+			contentType: "application/json; charset=utf-8",
+			method : "POST",
+			success:function(data) {
+				$("#boardarea").replaceWith(data);
+				console.log(data)
+			},error: function(e) {
+				console.log(e)
+			}
+			
+		})
+
+	}
+
+	// 1개 게시판 리스트 호출
+	function selectListBoard(com_num) {
+
+		$.ajax({
+			
+			url : "selectListBoard?com_num="+com_num,
+			contentType: "application/json; charset=utf-8",
+			method : "POST",
+			success:function(data) {
+				$("#boardarea").replaceWith(data);
+				console.log(data)
+			},error: function(e) {
+				console.log(e)
+			}
+			
+		})
+		
+	}
+
+	// 1개 게시글 호출
+	function selectOneBoard(board_num) {
+		$.ajax({
+			
+			url : "selectOneBoard?board_num="+board_num,
+			contentType: "application/json; charset=utf-8",
+			method : "POST",
+			success:function(data) {
+				$("#boarddetail").replaceWith(data);
+				console.log(data)
+			},error: function(e) {
+				console.log(e)
+			}
+			
+		})
+	}
+	
+	// 게시글 수정 모달
+	function updateBoard(board_num) {
+		$.ajax({
+			
+			url : "updateBoard?board_num="+board_num,
+			contentType: "application/json; charset=utf-8",
+			method : "POST",
+			success:function(data) {
+				$("#boardupdate").replaceWith(data);
+				console.log(data)
+			},error: function(e) {
+				console.log(e)
+			}
+			
+		})
+	}
+	
+	// 게시글 수정 제출
+	function updateBoardRes() {
+		
+		function getParameterValues() {
+			
+			var board_num = $("#update_board_num").val();
+			var com_num = $("#update_com_num").val();
+			var member_num = $("#update_member_num").val();
+			var board_title = $("#update_board_title").val();
+			var member_nickname = $("#update_member_nickname").val(); 
+			var member_id = $("#update_member_id").val();
+			var board_content = $("#update_board_content").val(); 
+			var board_date = $("#update_board_date").val();
+			
+			
+			return "?board_num="+board_num+
+				   "&com_num="+com_num+
+				   "&member_num="+member_num+
+				   "&board_title="+board_title+
+				   "&member_nickname="+member_nickname+
+				   "&member_id="+member_id+
+				   "&board_content="+board_content+
+				   "&board_date="+board_date
+				   
+		}
+		
+		
+		
+		$.ajax({
+			
+			url : "updateBoardRes"+getParameterValues(),
+			contentType: "application/json; charset=utf-8",
+			method : "POST",
+			success:function(data) {
+				alert("수정완료")
+				$("#boarddetail").replaceWith(data);
+				console.log(data)
+			},error: function(e) {
+				alert("수정실패")
+				console.log(e)
+			}
+			
+		})		
+	}
+	
+	
+	
+	// 게시글 삭제
+	function deleteBoard(board_num) {
+		
+		
+		
+	}
+</script>
+
 </head>
 <body>
 
 	<h1>COMMUNITY</h1>
+
+	<table border="1">
+		
+		<tr th:if="${communitylist.size() == 0}">
+			<th>게시판이 없습니다.</th>
+		</tr>
+		<tr><td><input type="button" value="전체" onclick="selectListAllBoard();" /></td>
+		</tr>
+		<tr>
+			<td th:unless="${communitylist.size() == 0}" th:each="communityDto:${communitylist}">
+			<input type="button" th:value="${communityDto.com_name}" th:onclick="|selectListBoard(${communityDto.com_num});|" />	
+			
+			</td>
+		</tr>
+	</table>
+	
+	<div id="boardarea">
+		<h1>게시판 리스팅 영역</h1>
+		<table border="1">
+		<tr th:each="boardDto:${boardlist}">
+			<td th:text="${boardDto.board_num}"></td>
+			<td th:text="${boardDto.com_num}"></td>
+			<td th:text="${boardDto.member_num}"></td>
+			<td><a href="javascript:void(0)" th:text="${boardDto.board_title}" th:onclick="|selectOneBoard(${boardDto.board_num});|"></a></td>
+			<td th:text="${boardDto.member_nickname}"></td>
+			<td th:text="${boardDto.member_id}"></td>
+			<td th:text="${boardDto.board_content}"></td>
+			<td th:text="${boardDto.board_date}"></td>			
+		</tr>	
+	</table>
+		
+	</div>
+	<div id="boarddetail">		
+		<h1>게시판 1개 클릭 영역 (모달로 구현 예정)</h1>
+		
+			<div th:object="${dto}">
+				<input type="text" th:value="${dto?.board_num}">
+				<input type="text" th:value="${dto?.com_num}">
+				<input type="text" th:value="${dto?.member_num}">
+				<input type="text" th:value="${dto?.board_title}">
+				<input type="text" th:value="${dto?.member_nickname}">
+				<input type="text" th:value="${dto?.member_id}">
+				<input type="text" th:value="${dto?.board_content}">
+				<input type="text" th:value="${dto?.board_date}">
+				<input type="button" value="수정하기" th:onclick="|updateBoard(${dto?.board_num});|">
+				<input type="button" value="삭제하기" th:onclick="|deleteBoard(${dto?.board_num});|">
+			</div>
+			
+			<div>
+				<h3>임시 게시글 등록 영역</h3>
+				
+				<form action="insertComment" method="post">
+					<input type="text" name="comment_content">
+					<input type="submit" value="댓글작성">
+				</form>
+							
+			</div>
+			
+			<div>
+				<h3>임시 댓글 영역</h3>
+				
+				<form action="insertComment" method="post">
+					<input type="text" name="comment_content">
+					<input type="submit" value="댓글작성">
+				</form>
+							
+			</div>
+			
+		<div id="boardcomment">
+			<h3>게시판 1개의 댓글 영역</h3>
+		</div>
+
+	</div>
+	
+	<div id="boardupdate">
+		<h1>게시판 수정 영역</h1>
+			<form action="updateboardres" method="post">
+			
+			<div th:object="${dto}">
+				<input type="text" id="update_board_num" th:value="${dto?.board_num}">
+				<input type="text" id="update_com_num" th:value="${dto?.com_num}">
+				<input type="text" id="update_member_num" th:value="${dto?.member_num}">
+				<input type="text" id="update_board_title" th:value="${dto?.board_title}">
+				<input type="text" id="update_member_nickname" th:value="${dto?.member_nickname}">
+				<input type="text" id="update_member_id" th:value="${dto?.member_id}">
+				<input type="text" id="update_board_content" th:value="${dto?.board_content}">
+				<input type="text" id="update_board_date" th:value="${dto?.board_date}">
+				<input type="button" value="수정하기" th:onclick="|updateBoardRes();|">
+				<input type="button" value="삭제하기" th:onclick="|deleteBoard(${dto?.board_num});|">
+			</div>
+				
+			</form>
+			
+		
+	</div>
+	
+	
 
 </body>
 </html>
