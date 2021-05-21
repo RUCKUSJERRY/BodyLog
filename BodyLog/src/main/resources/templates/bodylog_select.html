@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http//www.tyymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+		<table border="1" th:object="${dto}">
+				<tr>
+					<th>시작날짜</th>
+					<td><input type="text" name="log_startday" th:value="*{log_startday}" readonly="readonly"></td>
+	
+				</tr>
+				<tr>
+					<th>종료날짜</th>
+					<td><input type="text" name="log_endday" th:value="*{log_endday}" readonly="readonly"></td>
+	
+				</tr>
+		
+				<tr>
+					<th>일정</th>
+					<td><textarea rows="10" cols="50" name="log_content" th:inline="text" readonly="readonly">[[*{log_content}]]</textarea>
+					</td>
+	
+				</tr>
+				
+				<tr>
+					<th>사진</th>
+					<td><input type="text" name="log_img" th:value="*{log_img}" readonly="readonly"></td>
+	
+				</tr>
+				
+				
+				
+				<tr>
+					<td colspan="3">
+						<input type="button" th:value="수정" th:onclick="|location.href='updateform?log_seq=*{log_seq}'|">
+						<input type="button" value="삭제" th:onclick="|location.href='delete?log_seq=*{log_seq}'|"> 
+						<input type="button" value="목록" th:onclick="location.href='list'"> 
+					</td>
+				</tr>
+		
+		</table>
+
+</body>
+</html>

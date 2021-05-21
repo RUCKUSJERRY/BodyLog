@@ -3,7 +3,9 @@ package bodylog.bodylog;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class BodylogBizImpl implements BodylogBiz {
 
 	@Autowired
@@ -16,15 +18,15 @@ public class BodylogBizImpl implements BodylogBiz {
 	}
 
 	@Override
-	public List<BodylogDto> bodylogList() {
+	public List<BodylogDto> selectList() {
 		// TODO Auto-generated method stub
-		return mapper.bodylogList();
+		return mapper.selectList();
 	}
 
 	@Override
-	public BodylogDto selectCal(int member_no) {
+	public BodylogDto selectOne(int log_seq) {
 		// TODO Auto-generated method stub
-		return mapper.selectCal(member_no);
+		return mapper.selectOne(log_seq);
 	}
 
 	@Override
@@ -34,9 +36,9 @@ public class BodylogBizImpl implements BodylogBiz {
 	}
 
 	@Override
-	public int delete(int member_no) {
+	public int delete(int log_seq) {
 		// TODO Auto-generated method stub
-		return mapper.delete(member_no);
+		return mapper.delete(log_seq);
 	}
 
 }

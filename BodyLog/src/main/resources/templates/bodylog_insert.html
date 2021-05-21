@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http//www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<form action="/bodylog/insertres" method="post">
+		<table>
+				<tr>
+					<th>시작날짜</th>
+					<td><input type="text" name="log_startday"></td>
+	
+				</tr>
+				<tr>
+					<th>종료날짜</th>
+					<td><input type="text" name="log_endday"></td>
+	
+				</tr>
+		
+				<tr>
+					<th>일정</th>
+					<td><textarea rows="10" cols="50" name="log_content"></textarea>
+					</td>
+	
+				</tr>
+				
+				<tr>
+					<td colspan="3">
+						<input type="file" name="log_img">
+						<input type="submit" th:value="일정등록">
+						<input type="button" value="취소" onclick="location.href='list'"> 
+					</td>
+				</tr>
+		
+		
+		
+		
+		</table>
+	
+	
+	
+	</form>
+
+</body>
+</html>

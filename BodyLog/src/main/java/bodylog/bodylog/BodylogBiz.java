@@ -4,10 +4,10 @@ import java.util.List;
 
 public interface BodylogBiz {
 	public int insert(BodylogDto dto);
-	public List<BodylogDto> bodylogList();
-	public BodylogDto selectCal(int member_no);
+	public List<BodylogDto> selectList();
+	public BodylogDto selectOne(int log_seq);
 	public int update(BodylogDto dto);
-	public int delete(int member_no);
+	public int delete(int log_seq);
 	
 	
 

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http//www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<table>
+	<tr>
+		<th>글번호</th>
+		<th>시작날짜</th>
+		<th>종료날짜</th>
+		<th>일정</th>
+		<th>사진</th>
+	
+	</tr>
+	<tr th:if=${list.size()==0}>
+		<th colspan="5">----일정 없음----</th>
+	</tr>
+	<tr th:unless="${list.size()==0}" th:each="dto:${list}">
+	    <td th:text="${dto.log_seq}"></td>
+		<td th:text="${dto.log_startday}">log_startday</td>
+		<td th:text="${dto.log_endday}">log_endday</td>
+		<td><a th:href="|@{/bodylog/select}?log_seq=${dto.log_seq}|" th:text="${dto.log_content}">log_content</a></td>
+		<td th:text="${dto.log_img}">log_img</td>
+	</tr>
+	
+	<tr>
+		<td colspan="3" >
+			<input type="button" th:value="글작성" onclick="location.href='insertform'">
+		</td>
+	</tr>
+	
+	
+
+
+</table>
+
+</body>
+</html>
