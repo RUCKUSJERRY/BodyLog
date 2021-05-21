@@ -3,54 +3,68 @@ package bodylog.bodylog;
 import java.util.Date;
 
 public class BodylogDto {
+	private int log_seq; 
 	private int member_num; 
-	private String cal_content; 
-	private String cal_img; 
-	private Date cal_startday;
-	private Date cal_endday;
+	private String log_content;
+	private String log_img; 
+	private String log_startday; 
+	private String log_endday;
+	
 	
 	public BodylogDto() {
+		super();
 	}
 	
-	public BodylogDto(int member_num, String cal_content, String cal_img, Date cal_startday, Date cal_endday) {
+	
+	public BodylogDto(int log_seq, int member_num, String log_content, String log_img, String log_startday,
+			String log_endday) {
+		this.log_seq = log_seq;
 		this.member_num = member_num;
-		this.cal_content = cal_content;
-		this.cal_img = cal_img;
-		this.cal_startday = cal_startday;
-		this.cal_endday = cal_endday;
+		this.log_content = log_content;
+		this.log_img = log_img;
+		this.log_startday = log_startday;
+		this.log_endday = log_endday;
 	}
 	
+	public int getLog_seq() {
+		return log_seq;
+	}
+	public void setLog_seq(int log_seq) {
+		this.log_seq = log_seq;
+	}
 	public int getMember_num() {
 		return member_num;
 	}
-	
 	public void setMember_num(int member_num) {
 		this.member_num = member_num;
 	}
-	public String getCal_content() {
-		return cal_content;
+	public String getLog_content() {
+		return log_content;
 	}
-	public void setCal_content(String cal_content) {
-		this.cal_content = cal_content;
+	public void setLog_content(String log_content) {
+		this.log_content = log_content;
 	}
-	public String getCal_img() {
-		return cal_img;
+	public String getLog_img() {
+		return log_img;
 	}
-	public void setCal_img(String cal_img) {
-		this.cal_img = cal_img;
+	public void setLog_img(String log_img) {
+		this.log_img = log_img;
 	}
-	public Date getCal_startday() {
-		return cal_startday;
+	public String getLog_startday() {
+		return log_startday;
 	}
-	public void setCal_startday(Date cal_startday) {
-		this.cal_startday = cal_startday;
+	public void setLog_startday(String log_startday) {
+		this.log_startday = log_startday;
 	}
-	public Date getCal_endday() {
-		return cal_endday;
+	public String getLog_endday() {
+		return log_endday;
 	}
-	public void setCal_endday(Date cal_endday) {
-		this.cal_endday = cal_endday;
+	public void setLog_endday(String log_endday) {
+		this.log_endday = log_endday;
 	} 
+	
+	
+	
 	
 	
 	
