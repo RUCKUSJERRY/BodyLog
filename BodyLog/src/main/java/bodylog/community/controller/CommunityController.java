@@ -45,17 +45,44 @@ public class CommunityController {
 	@PostMapping("/selectListAllBoard")
 	public String selectListAllBoard(Model model) {
 		System.out.println("selectListAllBoard");	
-		
-		//model.addAttribute("boardlist", comBoardBiz.selectListCommunityBoard());
-		
-//		List<CommunityBoardDto> list = comBoardBiz.selectListCommunityBoard();
-//		Gson gson = new Gson();
-//		System.out.println("selectListAllBoard");
-//		String jsonString = gson.toJson(list);
-//		System.out.println(jsonString);
-		model.addAttribute("boardlist", comBoardBiz.selectListCommunityBoard());
+
+		model.addAttribute("boardlist", comBoardBiz.selectListAllCommunityBoard());
 		
 		return "community-main :: #boardarea";
+		
+	}
+	
+	@PostMapping("/selectListBoard")
+	public String selectListBoard(Model model, int com_num) {
+		System.out.println("selectListBoard");	
+
+		model.addAttribute("boardlist", comBoardBiz.selectListCommunityBoard(com_num));
+		
+		return "community-main :: #boardarea";
+		
+	}
+	
+	@PostMapping("/selectOneBoard")
+	public String selectOneBoard(Model model, int board_num) {
+		System.out.println("selectOneBoard");	
+		
+		System.out.println(comBoardBiz.selectOneCommunityBoard(board_num).getBoard_title());
+		
+		model.addAttribute("dto", comBoardBiz.selectOneCommunityBoard(board_num));
+		
+		return "community-main :: #boarddetail";
+		
+	}
+	
+	@PostMapping("/updateBoard")
+	public String updateBoard(Model model, int board_num) {
+		System.out.println("updateBoard");
+		
+		System.out.println(comBoardBiz.selectOneCommunityBoard(board_num).getBoard_title());
+		
+		model.addAttribute("dto", comBoardBiz.selectOneCommunityBoard(board_num));
+		
+		return "community-main :: #boardupdate";
 		
 	}
 	

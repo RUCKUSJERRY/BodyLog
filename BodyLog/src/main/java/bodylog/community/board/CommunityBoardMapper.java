@@ -12,9 +12,12 @@ import org.apache.ibatis.annotations.Update;
 public interface CommunityBoardMapper {
 
 	@Select(" SELECT BOARD_NUM, COM_NUM, MEMBER_NUM, BOARD_TITLE, MEMBER_ID, MEMBER_NICKNAME, BOARD_CONTENT, BOARD_DATE, BOARD_TAG FROM COMBOARD ORDER BY BOARD_NUM DESC ")
-	List<CommunityBoardDto> selectListCommunityBoard();
+	List<CommunityBoardDto> selectListAllCommunityBoard();
 	
-	@Select("")
+	@Select(" SELECT BOARD_NUM, COM_NUM, MEMBER_NUM, BOARD_TITLE, MEMBER_ID, MEMBER_NICKNAME, BOARD_CONTENT, BOARD_DATE, BOARD_TAG FROM COMBOARD WHERE COM_NUM = #{com_num} ORDER BY BOARD_NUM DESC ")
+	List<CommunityBoardDto> selectListCommunityBoard(int com_num);
+	
+	@Select(" SELECT BOARD_NUM, COM_NUM, MEMBER_NUM, BOARD_TITLE, MEMBER_ID, MEMBER_NICKNAME, BOARD_CONTENT, BOARD_DATE, BOARD_TAG FROM COMBOARD WHERE BOARD_NUM = #{board_num} ")
 	CommunityBoardDto selectOneCommunityBoard(int com_num);
 	
 	@Insert("")
