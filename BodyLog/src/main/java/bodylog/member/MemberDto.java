@@ -1,7 +1,5 @@
 package bodylog.member;
 
-import org.springframework.stereotype.Service;
-
 public class MemberDto {
 
 	private int member_num;
@@ -12,6 +10,7 @@ public class MemberDto {
 	private String member_addr;
 	private String member_phone;
 	private String member_role;
+	private String member_enabled;
 	private String member_gender;
 	
 	public MemberDto() {
@@ -80,6 +79,14 @@ public class MemberDto {
 
 	public void setMember_role(String member_role) {
 		this.member_role = member_role;
+	}
+	
+	public String getMember_enabled() {
+		return member_enabled;
+	}
+
+	public void setMember_enabled(String member_enabled) {
+		this.member_enabled = member_enabled;
 	}
 
 	public String getMember_gender() {

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="resources/js/login.js"></script>
+</head>
+<body>
+
+	<table border="1">
+		<tr>
+			<th>ID</th>
+			<td><input type="text" id="member_id"></td>
+		</tr>
+		<tr>
+			<th>PW</th>
+			<td><input type="password" id="member_pw"></td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<input type="button" value="로그인" onclick="login();">
+				<input type="button" value="취소" onclick="location.href='index'">
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center" id="loginChk"></td>
+		</tr>
+	</table>
+
+</body>
+</html>
