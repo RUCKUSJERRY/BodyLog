@@ -15,8 +15,18 @@ public class MemberSignUpBizImpl implements MemberSignUpBiz {
 	}
 
 	@Override
-	public MemberDto idCheck(String member_id) {
+	public int idCheck(String member_id) {
 		return memberSignUpMapper.idCheck(member_id);
+	}
+
+	@Override
+	public int nickNameCheck(String member_nickname) {
+		return memberSignUpMapper.nickNameCheck(member_nickname);
+	}
+
+	@Override
+	public int phoneCheck(String member_phone) {
+		return memberSignUpMapper.phoneCheck(member_phone);
 	}
 
 }
