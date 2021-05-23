@@ -35,6 +35,13 @@ public class CommunityController {
 	//@Autowired
 	//private CommunityBoardCommentBiz comBoardCommentBiz;
 	
+	// 메인페이지로 이동
+	@GetMapping("/main")
+	public String main() {
+
+		return "main";
+	}
+	
 	// 커뮤니티 메인 접속시
 	@GetMapping("/main")
 	public String communityMain(Model model) {
@@ -43,6 +50,8 @@ public class CommunityController {
 		
 		return "community-main";
 	}
+	
+
 	
 	public String communityDetail(Model model) {
 		
@@ -83,6 +92,21 @@ public class CommunityController {
 		return "community-main :: #boarddetail";
 		
 	}
+	
+	// 게시글 UPDATE 모달
+		@PostMapping("/insertBoard")
+		public String insertBoard(Model model, int board_num) {
+			System.out.println("insertBoard");
+			
+			System.out.println(comBoardBiz.selectOneCommunityBoard(board_num).getBoard_title());
+			
+			model.addAttribute("dto", comBoardBiz.selectOneCommunityBoard(board_num));
+			
+			return "community-main :: #boardupdate";
+			
+		}
+	
+	
 	
 	// 게시글 UPDATE 모달
 	@PostMapping("/updateBoard")
