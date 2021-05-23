@@ -1,7 +1,5 @@
 package bodylog.community.board.comment;
 
-import java.util.Date;
-
 public class CommunityBoardCommentDto {
 
 	private int comment_num;
@@ -11,14 +9,14 @@ public class CommunityBoardCommentDto {
 	private String member_name;
 	private String member_id;
 	private String comment_content;
-	private Date comment_date;
+	private String comment_date;
 	
 	public CommunityBoardCommentDto() {
 		
 	}
 	
 	public CommunityBoardCommentDto(int comment_num, int board_num, int comment_group, int member_num,
-			String member_name, String member_id, String comment_content, Date comment_date) {
+			String member_name, String member_id, String comment_content, String comment_date) {
 		this.comment_num = comment_num;
 		this.board_num = board_num;
 		this.comment_group = comment_group;
@@ -85,11 +83,11 @@ public class CommunityBoardCommentDto {
 		this.comment_content = comment_content;
 	}
 
-	public Date getComment_date() {
+	public String getComment_date() {
 		return comment_date;
 	}
 
-	public void setComment_date(Date comment_date) {
+	public void setComment_date(String comment_date) {
 		this.comment_date = comment_date;
 	}
 	

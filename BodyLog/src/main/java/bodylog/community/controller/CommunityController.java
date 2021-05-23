@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.google.gson.Gson;
 
+import bodylog.common.Util;
 import bodylog.community.CommunityBiz;
 import bodylog.community.board.CommunityBoardBiz;
 import bodylog.community.board.CommunityBoardDto;
@@ -22,7 +23,9 @@ import bodylog.community.board.comment.CommunityBoardCommentBiz;
 @Controller
 @RequestMapping("/community")
 public class CommunityController {
-
+	
+	Util util = new Util();
+	
 	@Autowired
 	private CommunityBiz comBiz;
 	
@@ -32,6 +35,13 @@ public class CommunityController {
 	//@Autowired
 	//private CommunityBoardCommentBiz comBoardCommentBiz;
 	
+	// 메인페이지로 이동
+	@GetMapping("/main")
+	public String main() {
+
+		return "main";
+	}
+	
 	// 커뮤니티 메인 접속시
 	@GetMapping("/main")
 	public String communityMain(Model model) {
@@ -40,6 +50,8 @@ public class CommunityController {
 		
 		return "community-main";
 	}
+	
+
 	
 	public String communityDetail(Model model) {
 		
@@ -82,6 +94,21 @@ public class CommunityController {
 	}
 	
 	// 게시글 UPDATE 모달
+		@PostMapping("/insertBoard")
+		public String insertBoard(Model model, int board_num) {
+			System.out.println("insertBoard");
+			
+			System.out.println(comBoardBiz.selectOneCommunityBoard(board_num).getBoard_title());
+			
+			model.addAttribute("dto", comBoardBiz.selectOneCommunityBoard(board_num));
+			
+			return "community-main :: #boardupdate";
+			
+		}
+	
+	
+	
+	// 게시글 UPDATE 모달
 	@PostMapping("/updateBoard")
 	public String updateBoard(Model model, int board_num) {
 		System.out.println("updateBoard");
@@ -98,12 +125,11 @@ public class CommunityController {
 	@PostMapping("/updateBoardRes")
 	public String updateBoardRes(Model model, 
 			int board_num, int com_num, int member_num, 
-			String board_title, String member_nickname, String member_id, String board_content, @RequestParam("board_date") Date board_date) {
+			String board_title, String member_nickname, String member_id, String board_content, Date board_date) {
 		System.out.println("updateBoardRes");
 		
-		CommunityBoardDto dto = new CommunityBoardDto(board_num, com_num, member_num, board_title, member_nickname, member_id, board_content, board_date);
-		Date date = new Date();
-		
+		CommunityBoardDto dto = new CommunityBoardDto(board_num, com_num, member_num, board_title, member_nickname, member_id, board_content, util.getTostrings(board_date));
+
 		int res = comBoardBiz.updateCommunityBoard(dto);
 		
 		if (res > 0) {

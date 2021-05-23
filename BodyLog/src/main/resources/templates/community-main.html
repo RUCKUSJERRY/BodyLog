@@ -2,7 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
+<!-- jQuery library -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 	// 우선 커뮤니티 메인을 접속하면 게시글 전체를 리스팅 해준다.
@@ -65,6 +67,28 @@
 			
 		})
 	}
+	
+	// 게시글 생성 모달
+	
+	function insertBoard(board_num) {
+		
+	    $.ajax({
+			
+			url : "insertBoard?board_num="+board_num,
+			contentType: "application/json; charset=utf-8",
+			method : "POST",
+			success:function(data) {
+				$("#boarddetail").replaceWith(data);
+				console.log(data)
+			},error: function(e) {
+				console.log(e)
+			}
+			
+		})
+		
+		
+	}
+	
 	
 	// 게시글 수정 모달
 	function updateBoard(board_num) {
@@ -130,6 +154,7 @@
 	
 	
 	
+	
 	// 게시글 삭제
 	function deleteBoard(board_num) {
 		
@@ -171,6 +196,12 @@
 			<td th:text="${boardDto.board_content}"></td>
 			<td th:text="${boardDto.board_date}"></td>			
 		</tr>	
+		<tr>
+			
+			<td><input type="button" value="글작성" th:onclick="|insertBoard(${dto?.board_num});|" /></td>
+			
+			
+		</tr>
 	</table>
 		
 	</div>
@@ -214,6 +245,55 @@
 			<h3>게시판 1개의 댓글 영역</h3>
 		</div>
 
+	</div>
+	<div id="boardinsert">
+		
+		<form action="insertBoardRes" method="post">
+			<table>
+				<tr>
+				<th>게시판 번호</th>
+				<td><input type="text" name="board_num"/></td>
+				</tr>
+				<tr>
+				<th>커뮤니티 번호</th>
+				<td><input type="text" name="com_num"/></td>
+				</tr>
+				<tr>
+				<th>맴버 번호</th>
+				<td><input type="text" name="member_num"/></td>
+				</tr>
+				<tr>
+				<th>게시글 제목</th>
+				<td><input type="text" name="board_title"/></td>
+				</tr>
+				<tr>
+				<th>맴버 별멍</th>
+				<td><input type="text" name="member_nickname"/></td>
+				</tr>
+				<tr>
+				<th>맴버 아이디</th>
+				<td><input type="text" name="member_id"/></td>
+				</tr>
+				<tr>
+				<th>게시글 내용</th>
+				<td><input type="text" name="board_content"/></td>
+				</tr>
+				<tr>
+				<th>날짜</th>
+				<td><input type="text" name="board_date"/></td>
+				</tr>
+				<tr>
+					<td>
+					<input type="submit" value="글작성하기">
+					<input type="button" value="취소하기">
+					
+					</td>
+				</tr>			
+			</table>
+		</form>
+		
+		
+		
 	</div>
 	
 	<div id="boardupdate">
