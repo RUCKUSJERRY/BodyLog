@@ -20,6 +20,11 @@ public class MemberController {
 	private MemberSignUpBiz signUpBiz;
 	@Autowired
 	private MemberLoginBiz loginBiz;
+	
+	@GetMapping("/main")
+	public String main() {
+		return "main";
+	}
 
 	@GetMapping("/signupform")
 	public String SignUpForm() {
@@ -61,9 +66,10 @@ public class MemberController {
 		return map;
 	}
 	
+	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "index";
+		return "index.html";
 	}
 	
 	@GetMapping("/idcheck")
