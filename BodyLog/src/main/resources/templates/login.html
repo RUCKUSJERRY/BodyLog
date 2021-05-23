@@ -13,7 +13,7 @@
 		<input type="text" id="member_id" placeholder="바디로그ID(이메일)" maxlength="20">
 		<input type="password" id="member_pw" placeholder="비밀번호" maxlength="20">
 		<input type="button" value="로그인" onclick="login();">
-		<input type="button" value="취소" onclick="location.href='index'">
+		<input type="button" value="취소" onclick="location.href='/member/main'">
 	
 	<!-- 회원가입 -->
 	<form th:action="@{/member/signupres}" id="signupform">
@@ -46,7 +46,7 @@
 		<h3>성별</h3>
 		<input type="text" name="member_gender" required="required">
 		<input type="submit" value="가입">
-		<input type="button" value="취소" onclick="location.href='/index.html'">
+		<input type="button" value="취소" onclick="location.href='/member/main'">
 	</form>
 </body>
 </html>
