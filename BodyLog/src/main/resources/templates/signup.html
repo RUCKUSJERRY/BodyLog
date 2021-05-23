@@ -3,48 +3,48 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="resources/js/idcheck.js"></script>
 </head>
 <body>
 
 	<h1>SIGNUP</h1>
-	<form action="/member/signupres">
+	<form th:action="@{/member/signupres}">
 		<table border="1">
 			<tr>
 				<th>아이디(이메일)</th>
 				<td>
-					<input type="text" name="member_id" value="OOOOOOO@OOOOO.OOO" required="required" title="n">
-					<input type="button" value="중복체크" th:onclick="|idCheck()|">
+					<input id="id_input" type="text" name="member_id" title="n"><br>
+					<span class="id_input_1">사용 가능한 아이디입니다.</span>
+					<span class="id_input_2">아이다가 이미 존재합니다.</span>
 				</td>
 			</tr>
 			<tr>
 				<th>비밀번호</th>
-				<td><input type="password" name="member_pw" required="required" th:onclick="|idCheckProc();|"></td>
+				<td><input type="password" name="member_pw" required="required"></td>
 			</tr>
 			<tr>
 				<th>이름</th>
-				<td><input type="text" name="member_name" required="required" th:onclick="|idCheckProc();|"></td>
+				<td><input type="text" name="member_name" required="required"></td>
 			</tr>
 			<tr>
 				<th>별명</th>
-				<td><input type="text" name="member_nickname" required="required" th:onclick="|idCheckProc();|"></td>
+				<td><input type="text" name="member_nickname" required="required"></td>
 			</tr>
 			<tr>
 				<th>주소</th>
-				<td><input type="text" name="member_addr" required="required" th:onclick="|idCheckProc();|"></td>
+				<td><input type="text" name="member_addr" required="required"></td>
 			</tr>
 			<tr>
 				<th>연락처</th>
-				<td><input type="text" name="member_phone" required="required" th:onclick="|idCheckProc();|"></td>
+				<td><input type="text" name="member_phone" required="required"></td>
 			</tr>
 			<tr>
 				<th>성별</th>
-				<td><input type="text" name="member_gender" required="required" th:onclick="|idCheckProc();|"></td>
+				<td><input type="text" name="member_gender" required="required"></td>
 			</tr>
 			<tr>
 				<td>
 					<input type="submit" value="가입">
-					<input type="button" value="취소" th:onclick="|location.href='index'|">
+					<input type="button" value="취소" onclick="location.href='/index.html'">
 				</td>
 			</tr>
 		</table>

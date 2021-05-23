@@ -11,7 +11,17 @@ public interface MemberSignUpMapper {
 	@Insert(" INSERT INTO MEMBER VALUES(MEMBERSEQ.NEXTVAL, #{member_id}) ")
 	int insertUser(MemberDto dto);
 	// 아이디 중복 체크
-	@Select(" SELECT MEMBER_NUM, MEMBER_ID, MEMBER_PW, MEMBER_NAME, MEMBER_NICKNAME, MEMBER_ADDR, MEMBER_PHONE, MEMBER_ROLE, MEMBER_ENABLED, MEMBER_GENDER FROM MEMBER "
+	@Select(" SELECT COUNT(*) FROM MEMBER "
 			+ " WHERE MEMBER_ID = #{member_id} ")
-	MemberDto idCheck(String member_id);
+	int idCheck(String member_id);
+	
+	// 별명 중복 체크
+	@Select(" SELECT COUNT(*) FROM MEMBER "
+			+ " WHERE MEMBER_NICKNAME = #{member_nickname} ")
+	int nickNameCheck(String member_nickname);
+	
+	// 전화번호 중복 체크
+	@Select(" SELECT COUNT(*) FROM MEMBER "
+			+ " WHERE MEMBER_PHONE = #{member_phone} ")
+	int phoneCheck(String member_phone);
 }

@@ -9,10 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/member")
 public class MemberController {
+	
 	
 	@Autowired
 	private MemberSignUpBiz signUpBiz;
@@ -41,6 +43,7 @@ public class MemberController {
 	}
 	
 	@GetMapping("/loginres")
+	@ResponseBody
 	public Map<String, Boolean> LoginRes(HttpSession session, MemberDto dto) {
 		
 		MemberDto res = loginBiz.Login(dto);
@@ -56,5 +59,50 @@ public class MemberController {
 		map.put("check", check);
 		
 		return map;
+	}
+	
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "index";
+	}
+	
+	@GetMapping("/idcheck")
+	@ResponseBody
+	public String idCheck(String member_id) {
+		
+		int result = signUpBiz.idCheck(member_id);
+		
+		if (result != 0) {
+			return "false";
+		} else {
+			return "true";
+		}		
+	}
+	
+	@GetMapping("/nicknamecheck")
+	@ResponseBody
+	public String nickNameCheck(String member_nickname) {
+		
+		int result = signUpBiz.nickNameCheck(member_nickname);
+		
+		if (result != 0) {
+			return "false";
+		} else {
+			return "true";
+		}	
+	}
+	
+	@GetMapping("/phonecheck")
+	@ResponseBody
+	public String phoneCheck(String member_phone) {
+		
+		int result = signUpBiz.phoneCheck(member_phone);
+		
+		if (result != 0) {
+			return "false";
+		} else {
+			return "true";
+		}
+		
 	}
 }
