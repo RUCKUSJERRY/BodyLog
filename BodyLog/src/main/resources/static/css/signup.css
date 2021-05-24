@@ -1,0 +1,32 @@
+@charset "UTF-8";
+/* 중복 아이디가 없을 때 */
+.id_input_1{
+	color: green;
+	display: none;
+}
+/* 중복 아이디가 있을 때 */
+.id_input_2{
+	color: red;
+	display: none;
+}
+
+/* 비밀번호의 규격이 틀릴 때 */
+.pw_input_1, .pw_input_2 {
+	color: red;
+	display: none;
+}
+/* 비밀번호에 공백이 있을 때 */
+.pw_null_1, .pw_null_2 {
+	color: red;
+	display: none;
+}
+/* 중복된 별명, 전화번호가 있을 때 */
+.nickname_input_1, .phone_input_1 {
+	color: green;
+	display: none;
+}
+/* 중복된 별명, 전화번호가 없을 때 */
+.nickname_input_2, .phone_input_2 {
+	color: red;
+	display: none;
+}

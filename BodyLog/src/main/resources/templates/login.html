@@ -1,31 +1,53 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="resources/js/login.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="/js/signup.js"></script>
+<script type="text/javascript" src="/js/jusoapi.js"></script>
+<link href="/css/signup.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/js/login.js"></script>
 </head>
 <body>
-
-	<table border="1">
-		<tr>
-			<th>ID</th>
-			<td><input type="text" id="member_id"></td>
-		</tr>
-		<tr>
-			<th>PW</th>
-			<td><input type="password" id="member_pw"></td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<input type="button" value="로그인" onclick="login();">
-				<input type="button" value="취소" onclick="location.href='index'">
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2" align="center" id="loginChk"></td>
-		</tr>
-	</table>
-
+	<!-- 로그인 -->
+		<input type="text" id="member_id" placeholder="바디로그ID(이메일)" maxlength="20">
+		<input type="password" id="member_pw" placeholder="비밀번호" maxlength="20">
+		<input type="button" value="로그인" onclick="login();">
+		<input type="button" value="취소" onclick="location.href='/member/main'">
+	
+	<!-- 회원가입 -->
+	<form th:action="@{/member/signupres}" id="signupform">
+		<h3>아이디</h3>
+		<input id="id_input" type="text" name="member_id" title="n"><br>
+		<span class="id_input_1">사용 가능한 아이디입니다.</span>
+		<span class="id_input_2">아이다가 이미 존재합니다.</span>
+		<h3>비밀번호</h3>
+		<input type="password" id="pw_input" name="member_pw" required="required"><br>
+		<span class="pw_input_1">8 ~ 16자 내외로 입력해 주세요.</span>
+		<span class="pw_null_1">공백은 입력할 수 없습니다.</span>
+		<h3>비밀번호 확인</h3>
+		<input type="password" id="passwordchk" name="member_pw" required="required"><br>
+		<span class="pw_input_2">비밀번호가 다릅니다.</span>
+		<span class="pw_null_2">공백은 입력할 수 없습니다.</span>
+		<h3>이름</h3>
+		<input type="text" name="member_name" required="required">
+		<h3>별명</h3>
+		<input type="text" id="nickname_input" name="member_nickname" required="required"><br>
+		<span class="nickname_input_1">사용 가능한 별명입니다.</span>
+		<span class="nickname_input_2">별명이 이미 존재합니다.</span>
+		<h3>주소</h3>
+		<input type="text" name="member_addr" required="required" readonly="readonly" placeholder="도로명 주소를 입력해 주세요">
+		<input type="button" value="검색" onclick="goPopup"><br>
+		<input type="text" placeholder="상세주소를 입력해 주세요">
+		<h3>전화번호</h3>
+		<input type="text" id="phone_input" name="member_phone" required="required"placeholder=" - 빼고 입력해 주세요"><br>
+		<span class="phone_input_1">사용 가능한 번호입니다.</span>
+		<span class="phone_input_2">번호가 이미 존재합니다.</span>
+		<h3>성별</h3>
+		<input type="text" name="member_gender" required="required">
+		<input type="submit" value="가입">
+		<input type="button" value="취소" onclick="location.href='/member/main'">
+	</form>
 </body>
 </html>
