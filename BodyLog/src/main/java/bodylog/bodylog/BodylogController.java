@@ -35,11 +35,13 @@ public class BodylogController {
 		}
 		return "redirect:/bodylog/insertform";
 	}
+	
 	@GetMapping("/updateform")
 	public String update(Model model, int log_seq) {
 		model.addAttribute("dto", biz.selectOne(log_seq));
 		return "bodylog_update";
 	}
+	
 	@PostMapping("/updateres")
 	public String updateres(BodylogDto dto) {
 		if(biz.update(dto)>0) {
