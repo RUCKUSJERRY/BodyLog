@@ -3,12 +3,14 @@ package bodylog.member;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -42,7 +44,7 @@ public class MemberController {
 		
 		int res = signUpBiz.insertUser(dto);
 		if (res > 0) {
-			return "redirect:index";
+			return "redirect:main";
 		}
 		
 		return "redirect:signform";
@@ -114,7 +116,28 @@ public class MemberController {
 			return "false";
 		} else {
 			return "true";
-		}
+		}	
+	}
+	
+	@PostMapping("/jusopopup")
+	public String jusoPopup(HttpServletRequest request) {
 		
+		String inputYn = request.getParameter("inputYn");
+		String roadFullAddr = request.getParameter("roadFullAddr");
+		String roadAddrPart1 = request.getParameter("roadAddrPart1");
+		String roadAddrPart2 = request.getParameter("roadAddrPart2");
+		String engAddr = request.getParameter("engAddr");
+		String jibunAddr = request.getParameter("jibunAddr");
+		String zipNo = request.getParameter("zipNo");
+		String addrDetail = request.getParameter("addrDetail");
+		String admCd = request.getParameter("admCd");
+		String rnMgtSn = request.getParameter("rnMgtSn");
+		String bdMgtSn = request.getParameter("bdMgtSn");
+		String entX = request.getParameter("entX");
+		String entY = request.getParameter("entY");
+		
+		String confmKey = "U01TX0FVVEgyMDIxMDUyMzAzNDMxNzExMTE5Mjc=";
+		
+		return "jusopopup";
 	}
 }

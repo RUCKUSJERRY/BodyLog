@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="/css/addrlinkSample.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/js/jusoapi.js"></script>
+</head>
+<body onload="init();">
+
+	<form id="form" name="form" method="post">
+		<input type="hidden" id="confmKey" name="confmKey" th:value="${confmKey}">
+		<input type="hidden" id="returnUrl" name="returnUrl" th:value="">
+		<input type="hidden" id="returnType" name="returnType" th:value="">
+	</form>
+	
+	<input type="hidden" id="inputYn" name="inputYn" th:value="${inputYn}">
+	<input type="hidden" id="entX" name="entX" th:value="${entX}">
+	<input type="hidden" id="entY" name="entY" th:value="${entY}">
+
+</body>
+</html>

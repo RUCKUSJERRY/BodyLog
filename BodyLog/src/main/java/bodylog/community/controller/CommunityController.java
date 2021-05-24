@@ -34,7 +34,7 @@ public class CommunityController {
 	
 	//@Autowired
 	//private CommunityBoardCommentBiz comBoardCommentBiz;
-	
+
 	// 커뮤니티 메인 접속시
 	@PostMapping("/selectCommunity")
 	public String communityMain(Model model) {
