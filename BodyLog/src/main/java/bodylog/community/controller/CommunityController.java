@@ -35,12 +35,12 @@ public class CommunityController {
 	//@Autowired
 	//private CommunityBoardCommentBiz comBoardCommentBiz;
 	
-	// 메인페이지로 이동
-	@GetMapping("/main")
-	public String main() {
-
-		return "main";
-	}
+//	// 메인페이지로 이동
+//	@GetMapping("/main")
+//	public String main() {
+//
+//		return "main";
+//	}
 	
 	// 커뮤니티 메인 접속시
 	@GetMapping("/main")
