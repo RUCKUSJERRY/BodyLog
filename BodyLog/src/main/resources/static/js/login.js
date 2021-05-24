@@ -21,7 +21,7 @@ function login() {
 			dataType:"json",
 			success:function(msg){
 				if (msg.check == true) {
-					location.href='/index.html';
+					location.href='/member/main';
 				} else {
 					$("#loginChk").show();
 					$("#loginChk").html("ID 혹은 Password가 잘못되었습니다.");
