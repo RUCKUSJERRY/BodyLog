@@ -2,159 +2,179 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <body th:fragment="fragment-community">
-<script type="text/javascript" src="/js/community.js"></script>
+	<script type="text/javascript" src="/js/community.js"></script>
 	<div class="mainarea">
 		<input type="hidden" id="footerchk" th:value="${pagename}">
-		<div id="comarea">
-		<div class="w3-dropdown-click">
-  			<button onclick="myFunction()" class="w3-button w3-black" id="comname">전체</button>
-  			<div id="comDrop" class="w3-dropdown-content w3-bar-block w3-border" >
-				<input type="button" class="w3-bar-item w3-button" value="전체" onclick="selectListAllBoard('전체');" />
-  				<input type="button" class="w3-bar-item w3-button" th:each="communityDto:${communitylist}" th:value="${communityDto.com_name}" 
-  				th:onclick="selectListBoard([[${communityDto.com_num}]], [[${communityDto.com_name}]]);" />
-  			</div>
-		</div>
+		<div id="comarea" class="w3-panel w3-bottombar">
+			<div class="w3-dropdown-click">
+				<button onclick="myFunction()" class="w3-button w3-signal-black"
+					id="comname">전체 <i class="fas fa-chevron-down"></i></button>
+				<div id="comDrop" class="w3-dropdown-content w3-bar-block w3-border">
+					<input type="button" class="w3-bar-item w3-button w3-center" value="전체"
+						onclick="selectListAllBoard('전체');" /> <input type="button"
+						class="w3-bar-item w3-button w3-center"
+						th:each="communityDto:${communitylist}"
+						th:value="${communityDto.com_name}"
+						th:onclick="selectListBoard([[${communityDto.com_num}]], [[${communityDto.com_name}]]);" />
+				</div>
+			</div>
+			<button class="w3-bar-item w3-button w3-right"><i class="fas fa-search"></i></button>
 		</div>
 
-		<div id="boardarea">
-			<h1>게시판 리스팅 영역</h1>
-		<table border="1">
-		<tr>
-			<th>게시판번호</th>
-			<th>커뮤니티번호</th>
-			<th>회원번호</th>
-			<th>게시글제목</th>
-			<th>회원별명</th>
-			<th>회원ID</th>
-			<th>게시글내용</th>
-			<th>작성날짜</th>
-		</tr>
-		<tr th:each="boardDto:${boardlist}">
-			<td th:text="${boardDto.board_num}"></td>
-			<td th:text="${boardDto.com_num}"></td>
-			<td th:text="${boardDto.member_num}"></td>
-			<td><a href="javascript:void(0)" th:text="${boardDto.board_title}" th:onclick="|selectOneBoard(${boardDto.board_num});|"></a></td>
-			<td th:text="${boardDto.member_nickname}"></td>
-			<td th:text="${boardDto.member_id}"></td>
-			<td th:text="${boardDto.board_content}"></td>
-			<td th:text="${boardDto.board_date}"></td>			
-		</tr>	
-		<tr>			
-			<td><input type="button" value="글작성" th:onclick="|insertBoard(${dto?.board_num});|" /></td>
-		</tr>
-		</table>
-		</div>
-		
-		<div id="boarddetail">
-			<h1>게시판 1개 클릭 영역 (모달로 구현 예정)</h1>
-		
-			<div th:object="${dto}">
-				<input type="text" th:value="${dto?.board_num}">
-				<input type="text" th:value="${dto?.com_num}">
-				<input type="text" th:value="${dto?.member_num}">
-				<input type="text" th:value="${dto?.board_title}">
-				<input type="text" th:value="${dto?.member_nickname}">
-				<input type="text" th:value="${dto?.member_id}">
-				<input type="text" th:value="${dto?.board_content}">
-				<input type="text" th:value="${dto?.board_date}">
-				<input type="button" value="수정하기" th:onclick="|updateBoard(${dto?.board_num});|">
-				<input type="button" value="삭제하기" th:onclick="|deleteBoard(${dto?.board_num});|">
+		<div id="boardarea" >
+			<div th:each="boardDto:${boardlist}">
+			<input type="hidden" th:value="${boardDto.board_num}">
+			<input type="hidden" th:value="${boardDto.com_num}">
+			<input type="hidden" th:value="${boardDto.member_num}">
+			<div th:text="${boardDto.board_title}" class="w3-panel w3-large"></div>
+			<div th:text="${boardDto.board_content}" class="w3-panel"></div>
+			<div class="w3-panel w3-border-bottom ">
+				<span class="w3-text-dark-gray" th:text="${boardDto.member_id} + '(' + ${boardDto.member_nickname} + ')'"></span>
+				<span class="w3-text-dark-gray w3-right w3-margin-bottom" th:text="${boardDto.board_date}"></span>
 			</div>
-			
-			<div>
-				<h3>임시 게시글 등록 영역</h3>
+			<div class="w3-panel w3-border-bottom ">
+				<a href="#" style="text-decoration: none;"><i class="far fa-thumbs-up"></i> 추천하기</a>	
+				<a href="#" style="text-decoration: none;"><i class="far fa-comment"></i> 댓글 <span class="w3-badge w3-white w3-margin-bottom">1</span></a> 
+			</div>
+			</div>
 				
-				<form action="insertComment" method="post">
-					<input type="text" name="comment_content">
-					<input type="submit" value="댓글작성">
-				</form>
-							
-			</div>
 			
-			<div>
-				<h3>임시 댓글 영역</h3>
-				
-				<form action="insertComment" method="post">
-					<input type="text" name="comment_content">
-					<input type="submit" value="댓글작성">
-				</form>
-							
-			</div>
 			
-		<div id="boardcomment">
-			<h3>게시판 1개의 댓글 영역</h3>
+			
 		</div>
+
+		<div id="boarddetail" class="w3-modal">
+			
+			<div class="w3-modal-content w3-animate-right w3-card-1">
+				<header class="w3-container w3-teal">
+					<span                                                                                                                                       
+						onclick="document.getElementById('boarddetail').style.display='none'"
+						class="w3-button w3-display-topleft">&times;</span>
+					<h2 class="w3-center">Modal Header</h2>
+				</header>
+				<div class="w3-container">
+					<div th:object="${dto}">
+						<input type="text" th:value="${dto?.board_num}"> 
+						<input type="text" th:value="${dto?.com_num}"> 
+						<input type="text" th:value="${dto?.member_num}"> 
+						<input type="text" th:value="${dto?.board_title}"> 
+						<input type="text" th:value="${dto?.member_nickname}"> 
+						<input type="text" th:value="${dto?.member_id}"> 
+						<input type="text" th:value="${dto?.board_content}"> 
+						<input type="text" th:value="${dto?.board_date}"> 
+						<input type="button" value="수정하기"	th:onclick="|updateBoard(${dto?.board_num});|"> 
+						<input type="button" value="삭제하기"	th:onclick="|deleteBoard(${dto?.board_num});|">
+					</div>
+
+					<div>
+						<h3>임시 게시글 등록 영역</h3>
+
+						<form action="insertComment" method="post">
+							<input type="text" name="comment_content"> <input
+								type="submit" value="댓글작성">
+						</form>
+
+					</div>
+
+					<div>
+						<h3>임시 댓글 영역</h3>
+
+						<form action="insertComment" method="post">
+							<input type="text" name="comment_content"> <input
+								type="submit" value="댓글작성">
+						</form>
+
+					</div>
+
+					<div id="boardcomment">
+						<h3>게시판 1개의 댓글 영역</h3>
+					</div>
+
+				</div>
+				<footer class="w3-container w3-teal">
+					<p>Modal Footer</p>
+				</footer>
+			</div>
+
+
+
+
+
 		</div>
-		
+
 		<div id="boardinsert">
-		
+
 			<h3>게시글 작성 영역</h3>
-		<form action="insertBoardRes" method="post">
-			<table border="1">
-				<tr>
-				<th>게시판 번호</th>
-				<td><input type="text" name="board_num"/></td>
-				</tr>
-				<tr>
-				<th>커뮤니티 번호</th>
-				<td><input type="text" name="com_num"/></td>
-				</tr>
-				<tr>
-				<th>맴버 번호</th>
-				<td><input type="text" name="member_num"/></td>
-				</tr>
-				<tr>
-				<th>게시글 제목</th>
-				<td><input type="text" name="board_title"/></td>
-				</tr>
-				<tr>
-				<th>맴버 별멍</th>
-				<td><input type="text" name="member_nickname"/></td>
-				</tr>
-				<tr>
-				<th>맴버 아이디</th>
-				<td><input type="text" name="member_id"/></td>
-				</tr>
-				<tr>
-				<th>게시글 내용</th>
-				<td><input type="text" name="board_content"/></td>
-				</tr>
-				<tr>
-				<th>날짜</th>
-				<td><input type="text" name="board_date"/></td>
-				</tr>
-				<tr>
-					<td>
-					<input type="submit" value="글작성하기">
-					<input type="button" value="취소하기">
-					
-					</td>
-				</tr>			
-			</table>
-		</form>
+			<form action="insertBoardRes" method="post">
+				<table border="1">
+					<tr>
+						<th>게시판 번호</th>
+						<td><input type="text" name="board_num" /></td>
+					</tr>
+					<tr>
+						<th>커뮤니티 번호</th>
+						<td><input type="text" name="com_num" /></td>
+					</tr>
+					<tr>
+						<th>맴버 번호</th>
+						<td><input type="text" name="member_num" /></td>
+					</tr>
+					<tr>
+						<th>게시글 제목</th>
+						<td><input type="text" name="board_title" /></td>
+					</tr>
+					<tr>
+						<th>맴버 별멍</th>
+						<td><input type="text" name="member_nickname" /></td>
+					</tr>
+					<tr>
+						<th>맴버 아이디</th>
+						<td><input type="text" name="member_id" /></td>
+					</tr>
+					<tr>
+						<th>게시글 내용</th>
+						<td><input type="text" name="board_content" /></td>
+					</tr>
+					<tr>
+						<th>날짜</th>
+						<td><input type="text" name="board_date" /></td>
+					</tr>
+					<tr>
+						<td><input type="submit" value="글작성하기"> <input
+							type="button" value="취소하기"></td>
+					</tr>
+				</table>
+			</form>
 		</div>
-		
+
 		<div id="boardupdate">
-		<h1>게시판 수정 영역</h1>
+			<h1>게시판 수정 영역</h1>
 			<form action="updateboardres" method="post">
-			
-			<div th:object="${dto}">
-				<input type="text" id="update_board_num" th:value="${dto?.board_num}">
-				<input type="text" id="update_com_num" th:value="${dto?.com_num}">
-				<input type="text" id="update_member_num" th:value="${dto?.member_num}">
-				<input type="text" id="update_board_title" th:value="${dto?.board_title}">
-				<input type="text" id="update_member_nickname" th:value="${dto?.member_nickname}">
-				<input type="text" id="update_member_id" th:value="${dto?.member_id}">
-				<input type="text" id="update_board_content" th:value="${dto?.board_content}">
-				<input type="text" id="update_board_date" th:value="${dto?.board_date}">
-				<input type="button" value="수정하기" th:onclick="|updateBoardRes();|">
-				<input type="button" value="삭제하기" th:onclick="|deleteBoard(${dto?.board_num});|">
-			</div>
-				
+
+				<div th:object="${dto}">
+					<input type="text" id="update_board_num"
+						th:value="${dto?.board_num}"> <input type="text"
+						id="update_com_num" th:value="${dto?.com_num}"> <input
+						type="text" id="update_member_num" th:value="${dto?.member_num}">
+					<input type="text" id="update_board_title"
+						th:value="${dto?.board_title}"> <input type="text"
+						id="update_member_nickname" th:value="${dto?.member_nickname}">
+					<input type="text" id="update_member_id"
+						th:value="${dto?.member_id}"> <input type="text"
+						id="update_board_content" th:value="${dto?.board_content}">
+					<input type="text" id="update_board_date"
+						th:value="${dto?.board_date}"> <input type="button"
+						value="수정하기" th:onclick="|updateBoardRes();|"> <input
+						type="button" value="삭제하기"
+						th:onclick="|deleteBoard(${dto?.board_num});|">
+				</div>
+
 			</form>
 		</div>
 		
 	</div>
+	<input id="insertButton" class="w3-button w3-large w3-circle w3-xlarge w3-ripple w3-black w3-right" type="button" value="+"
+					th:onclick="|insertBoard(${dto?.board_num});|" />	
 
 </body>
 

@@ -1,9 +1,9 @@
 *{
-  margin: 0;
+  position: relative;
+  margin: 0 auto;
   padding: 0;
+  max-width: 600px;
 }
-
-
 
 .mainarea {
   left: 0;
@@ -14,8 +14,14 @@
   max-height: 680px;
   margin: 50px auto;
   overflow: auto;
-  border: 1px solid black;
 }
+
+#insertButton {
+	position: absolute;
+	bottom: 5%;
+	right: 5%;
+}
+
 
 #boarddetail {
 	

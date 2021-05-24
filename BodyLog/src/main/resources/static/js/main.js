@@ -14,8 +14,6 @@ $(function() {
 	
 })
 
-
-
 function getPage() {
 
 	var btn = document.getElementsByName("slideItem");

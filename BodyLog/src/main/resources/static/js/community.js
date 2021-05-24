@@ -37,7 +37,8 @@ function selectListAllBoard(comname) {
 		method : "POST",
 		success: function(data) {
 			$("#boardarea").replaceWith(data);
-			$("#comname").text(comname);
+			$("#comname").text(comname + " ");
+			$("#comname").append('<i class="fas fa-chevron-down">');
 			var x = document.getElementById("comDrop");
 			    x.className = x.className.replace(" w3-show", "");
 			console.log(name);
@@ -61,11 +62,13 @@ function selectListBoard(com_num, comname) {
 		contentType: "application/json; charset=utf-8",
 		method : "POST",
 		success:function(data) {
+			console.log(data)
 			$("#boardarea").replaceWith(data);
-			$("#comname").text(comname);
+			$("#comname").text(comname + " ");
+			$("#comname").append('<i class="fas fa-chevron-down">');
 			var x = document.getElementById("comDrop");
 		    x.className = x.className.replace(" w3-show", "");
-			console.log(data)
+			
 		},error: function(e) {
 			console.log(e)
 		}
@@ -83,7 +86,9 @@ function selectOneBoard(board_num) {
 		contentType: "application/json; charset=utf-8",
 		method : "POST",
 		success:function(data) {
+			
 			$("#boarddetail").replaceWith(data);
+			document.getElementById('boarddetail').style.display='block';
 			console.log(data)
 		},error: function(e) {
 			console.log(e)

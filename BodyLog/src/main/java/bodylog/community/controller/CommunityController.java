@@ -90,9 +90,7 @@ public class CommunityController {
 				int board_num, int com_num, int member_num, 
 				String board_title, String member_nickname, String member_id, String board_content, String board_date) {
 			System.out.println("insertBoard");
-			
-			
-			
+
 			System.out.println(comBoardBiz.selectOneCommunityBoard(board_num).getBoard_title());
 			
 			model.addAttribute("dto", comBoardBiz.selectOneCommunityBoard(board_num));
