@@ -35,23 +35,14 @@ public class CommunityController {
 	//@Autowired
 	//private CommunityBoardCommentBiz comBoardCommentBiz;
 	
-	// 메인페이지로 이동
-	@GetMapping("/main")
-	public String main() {
-
-		return "main";
-	}
-	
 	// 커뮤니티 메인 접속시
-	@GetMapping("/main")
+	@PostMapping("/selectCommunity")
 	public String communityMain(Model model) {
 		System.out.println("community-main");
 		model.addAttribute("communitylist", comBiz.selectListCommunity());
 		
-		return "community-main";
+		return "community :: #comarea";
 	}
-	
-
 	
 	public String communityDetail(Model model) {
 		
@@ -65,7 +56,7 @@ public class CommunityController {
 
 		model.addAttribute("boardlist", comBoardBiz.selectListAllCommunityBoard());
 		
-		return "community-main :: #boardarea";
+		return "community :: #boardarea";
 		
 	}
 	
@@ -76,7 +67,7 @@ public class CommunityController {
 
 		model.addAttribute("boardlist", comBoardBiz.selectListCommunityBoard(com_num));
 		
-		return "community-main :: #boardarea";
+		return "community :: #boardarea";
 		
 	}
 	
@@ -89,20 +80,24 @@ public class CommunityController {
 		
 		model.addAttribute("dto", comBoardBiz.selectOneCommunityBoard(board_num));
 		
-		return "community-main :: #boarddetail";
+		return "community :: #boarddetail";
 		
 	}
 	
 	// 게시글 UPDATE 모달
-		@PostMapping("/insertBoard")
-		public String insertBoard(Model model, int board_num) {
+		@PostMapping("/insertBoardRes")
+		public String insertBoard(Model model, 
+				int board_num, int com_num, int member_num, 
+				String board_title, String member_nickname, String member_id, String board_content, String board_date) {
 			System.out.println("insertBoard");
+			
+			
 			
 			System.out.println(comBoardBiz.selectOneCommunityBoard(board_num).getBoard_title());
 			
 			model.addAttribute("dto", comBoardBiz.selectOneCommunityBoard(board_num));
 			
-			return "community-main :: #boardupdate";
+			return "community :: #boardupdate";
 			
 		}
 	
@@ -117,7 +112,7 @@ public class CommunityController {
 		
 		model.addAttribute("dto", comBoardBiz.selectOneCommunityBoard(board_num));
 		
-		return "community-main :: #boardupdate";
+		return "community :: #boardupdate";
 		
 	}
 	
@@ -125,20 +120,20 @@ public class CommunityController {
 	@PostMapping("/updateBoardRes")
 	public String updateBoardRes(Model model, 
 			int board_num, int com_num, int member_num, 
-			String board_title, String member_nickname, String member_id, String board_content, Date board_date) {
+			String board_title, String member_nickname, String member_id, String board_content, String board_date) {
 		System.out.println("updateBoardRes");
 		
-		CommunityBoardDto dto = new CommunityBoardDto(board_num, com_num, member_num, board_title, member_nickname, member_id, board_content, util.getTostrings(board_date));
+		CommunityBoardDto dto = new CommunityBoardDto(board_num, com_num, member_num, board_title, member_nickname, member_id, board_content, board_date);
 
 		int res = comBoardBiz.updateCommunityBoard(dto);
 		
 		if (res > 0) {
 			model.addAttribute("dto", comBoardBiz.selectOneCommunityBoard(board_num));
 			
-			return "community-main :: #boarddetail";
+			return "community :: #boarddetail";
 			
 		} else {
-			return "community-main";
+			return "community";
 		}
 		
 		
