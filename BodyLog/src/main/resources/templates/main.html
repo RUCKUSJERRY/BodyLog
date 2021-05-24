@@ -1,15 +1,34 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <div th:replace="/fragments/header.html :: fragment-header"></div>
+    <div th:replace="header.html :: fragment-header"></div>
 </head>
-<body>
-
+<body th:switch="${pagename}">
+	<div th:case="'home'" >
+		<div th:replace="home.html :: fragment-home"></div>
+	</div>
+	<div th:case="'community'">
+		<div th:replace="community.html :: fragment-community"></div>
+	</div>
+	<div th:case="'bodylog'">
+		<div th:replace="bodylog.html :: fragment-bodylog"></div>
+	</div>
+	<div th:case="'like'">
+		<div th:replace="like.html :: fragment-like"></div>
+	</div>
+	<div th:case="'mypage'">
+		<div th:replace="member.html :: fragment-member"></div>
+	</div>
+	
+	<!-- 
 	<a href="/community/main">커뮤니티들어가기</a>
 	<a href="/member/loginform">로그인</a>
 	<a href="/member/logout">로그아웃</a>
 	<a href="/member/logout"></a>
-
-	<footer th:replace="/fragments/footer.html :: fragment-footer"></footer>
+	 -->
+	 
 </body>
+<footer th:replace="footer.html :: fragment-footer" ></footer>
+   
+
 </html>

@@ -167,21 +167,27 @@
 <body>
 
 	<h1>COMMUNITY</h1>
-
-	<table border="1">
+	
+	
+	
+	<div id="comarea">
+		<table border="1">
 		
-		<tr th:if="${communitylist.size() == 0}">
+			<tr th:if="${communitylist.size() == 0}">
 			<th>게시판이 없습니다.</th>
-		</tr>
-		<tr><td><input type="button" value="전체" onclick="selectListAllBoard();" /></td>
-		</tr>
-		<tr>
+			</tr>
+			<tr><td><input type="button" value="전체" onclick="selectListAllBoard();" /></td>
+			</tr>
+			<tr>
 			<td th:unless="${communitylist.size() == 0}" th:each="communityDto:${communitylist}">
 			<input type="button" th:value="${communityDto.com_name}" th:onclick="|selectListBoard(${communityDto.com_num});|" />	
 			
 			</td>
 		</tr>
-	</table>
+		</table>
+	</div>
+	
+	
 	
 	<div id="boardarea">
 		<h1>게시판 리스팅 영역</h1>
