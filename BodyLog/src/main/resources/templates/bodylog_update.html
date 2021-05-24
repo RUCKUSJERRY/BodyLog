@@ -6,31 +6,31 @@
 </head>
 <body>
 
-	<form action="/bodylog/updateres" method="post">
-	<input type="hidden" name="log_seq" value="*{log_seq }">
-		<table border="1" th:object="${dto}">
-		
+	<form th:action="@{updateres}" method="post">
+	<input type="hidden" name="log_seq" th:value="${dto.log_seq}">
+		<table border="1">
+	
 				<tr>
 					<th>시작날짜</th>
-					<td><input type="text" name="log_startday" th:value="*{log_startday}"></td>
+					<td><input type="text" name="log_startday" th:value="${dto.log_startday}"></td>
 	
 				</tr>
 				<tr>
 					<th>종료날짜</th>
-					<td><input type="text" name="log_endday" th:value="*{log_endday}"></td>
+					<td><input type="text" name="log_endday" th:value="${dto.log_endday}"></td>
 	
 				</tr>
 		
 				<tr>
 					<th>일정</th>
-					<td><textarea rows="10" cols="50" name="log_content" th:inline="text">[[*{log_content}]]</textarea>
+					<td><textarea rows="10" cols="50" name="log_content" th:inline="text">[[${dto.log_content}]]</textarea>
 					</td>
 	
 				</tr>
 				
 				<tr>
 					<th>사진</th>
-					<td><input type="text" name="log_img" th:value="*{log_img}"></td>
+					<td><input type="text" name="log_img" th:value="${log_img}"></td>
 	
 				</tr>
 				
@@ -38,7 +38,7 @@
 				
 				<tr>
 					<td colspan="3">
-						<input type="submit" value="일정등록">
+						<input type="submit" value="수정하기">
 						<input type="button" value="목록" onclick="location.href='list'"> 
 					</td>
 				</tr>
