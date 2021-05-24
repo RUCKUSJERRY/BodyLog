@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +25,12 @@ public class MemberController {
 	private MemberLoginBiz loginBiz;
 	
 	@GetMapping("/main")
-	public String main() {
+	public String main(Model model, String pagename) {
+
+		//String res = "fragments/" + pagename + ".html :: fragment-" + pagename;
+		//System.out.println(res);
+		model.addAttribute("pagename", pagename);
+		
 		return "main";
 	}
 
