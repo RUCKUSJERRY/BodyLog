@@ -6,19 +6,83 @@
 <link th:href='@{/fullcalendar/main.css}' rel='stylesheet' />
 <script th:src='@{/fullcalendar/main.js}'></script>
 <script th:src='@{/fullcalendar/ko.js}'></script>
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-	document.addEventListener('DOMContentLoaded', function() {
+
+	function addEvent(){
+		location.href='insertform';
+	}
+
+	$(document).ready(function() {
+
 		var calendarEl = document.getElementById('calendar');
 		var calendar = new FullCalendar.Calendar(calendarEl, {
 			initialView : 'dayGridMonth',
 			locale : 'ko',
-			/* header: {
-				left: calendar_left, 
+			headerToolbar : {
+				left : 'addEventButton',
+				center : 'title'
+			},
+			customButtons : {
+				addEventButton : {
+					text : '일정등록',
+					click : function() {
+						//여기에 일정추가 함수 호출하면 되지 않을까? 
+							addEvent(); //addEvent라는 함수 호출 
+					}
 
-				center: 'prev, title, next today', 
+				}
+			},
+			selectable : true,
+			eventLimit : true,
+			businessHours : true,
+			editable : true,
+			dayMaxEvents : true, // allow "more" link when too many events
+			events : [ {
+				title : '이렇게 달력을 넣어?',
+				start : '2021-05-25'
+			}, {
+				title : '이렇게 일정을? ',
+				start : '2021-05-22',
+				end : '2021-05-24'
+			}, {
+				groupId : 999,
+				title : 'Repeating Event',
+				start : '2020-09-09T16:00:00'
+			}, {
+				groupId : 999,
+				title : 'Repeating Event',
+				start : '2020-09-16T16:00:00'
+			}, {
+				title : 'Conference',
+				start : '2020-09-11',
+				end : '2020-09-13'
+			}, {
+				title : '일정을',
+				start : '2021-05-12T10:30:00',
+				end : '2021-05-12T12:30:00'
+			}, {
+				title : '여러개',
+				start : '2021-05-12T12:00:00'
+			}, {
+				title : '등록할때',
+				start : '2021-05-12T14:30:00'
+			}, {
+				title : '이렇게',
+				start : '2021-05-12T17:30:00'
+			}, {
+				title : 'Dinner',
+				start : '2021-05-12T20:00:00'
+			}, {
+				title : 'Birthday Party',
+				start : '2021-05-12T07:00:00'
+			}, {
+				title : '이거는 링크연결된다? ',
+				url : 'http://google.com/',
+				start : '2021-05-12'
+			} ]
 
-				right: '' 
-				} */
 		});
 
 		calendar.render();

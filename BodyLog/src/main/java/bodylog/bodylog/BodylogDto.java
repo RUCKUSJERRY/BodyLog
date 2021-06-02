@@ -7,16 +7,16 @@ public class BodylogDto {
 	private int member_num; 
 	private String log_content;
 	private String log_img; 
-	private Date log_startday; 
-	private Date log_endday;
+	private String log_startday; 
+	private String log_endday;
 	
 	
 	public BodylogDto() {
 	}
 	
 	
-	public BodylogDto(int log_seq, int member_num, String log_content, String log_img, Date log_startday,
-			Date log_endday) {
+	public BodylogDto(int log_seq, int member_num, String log_content, String log_img, String log_startday,
+			String log_endday) {
 		this.log_seq = log_seq;
 		this.member_num = member_num;
 		this.log_content = log_content;
@@ -25,6 +25,15 @@ public class BodylogDto {
 		this.log_endday = log_endday;
 	}
 	
+	
+	//D-day 생성자..아마도... 
+	public BodylogDto(String log_content, String log_startday, String log_endday) {
+		this.log_content = log_content;
+		this.log_startday = log_startday;
+		this.log_endday = log_endday;
+	}
+
+
 	public int getLog_seq() {
 		return log_seq;
 	}
@@ -49,16 +58,16 @@ public class BodylogDto {
 	public void setLog_img(String log_img) {
 		this.log_img = log_img;
 	}
-	public Date getLog_startday() {
+	public String getLog_startday() {
 		return log_startday;
 	}
-	public void setLog_startday(Date log_startday) {
+	public void setLog_startday(String log_startday) {
 		this.log_startday = log_startday;
 	}
-	public Date getLog_endday() {
+	public String getLog_endday() {
 		return log_endday;
 	}
-	public void setLog_endday(Date log_endday) {
+	public void setLog_endday(String log_endday) {
 		this.log_endday = log_endday;
 	} 
 	
