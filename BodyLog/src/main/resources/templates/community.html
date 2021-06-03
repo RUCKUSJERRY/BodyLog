@@ -7,7 +7,7 @@
 		<input type="hidden" id="footerchk" th:value="${pagename}">
 		<div id="comarea" class="w3-panel w3-bottombar">
 			<div class="w3-dropdown-click">
-				<button onclick="myFunction()" class="w3-button w3-signal-black"
+				<button onclick="comDrop()" class="w3-button w3-signal-black"
 					id="comname">전체 <i class="fas fa-chevron-down"></i></button>
 				<div id="comDrop" class="w3-dropdown-content w3-bar-block w3-border">
 					<input type="button" class="w3-bar-item w3-button w3-center" value="전체"
@@ -23,6 +23,7 @@
 
 		<div id="boardarea" >
 			<div th:each="boardDto:${boardlist}">
+			<div th:onclick="selectOneBoard([[${boardDto.board_num}]])">
 			<input type="hidden" th:value="${boardDto.board_num}">
 			<input type="hidden" th:value="${boardDto.com_num}">
 			<input type="hidden" th:value="${boardDto.member_num}">
@@ -32,39 +33,47 @@
 				<span class="w3-text-dark-gray" th:text="${boardDto.member_id} + '(' + ${boardDto.member_nickname} + ')'"></span>
 				<span class="w3-text-dark-gray w3-right w3-margin-bottom" th:text="${boardDto.board_date}"></span>
 			</div>
+			</div>
+			
 			<div class="w3-panel w3-border-bottom ">
 				<a href="#" style="text-decoration: none;"><i class="far fa-thumbs-up"></i> 추천하기</a>	
-				<a href="#" style="text-decoration: none;"><i class="far fa-comment"></i> 댓글 <span class="w3-badge w3-white w3-margin-bottom">1</span></a> 
+				<a href="#" style="text-decoration: none;"><i class="far fa-comment"></i> 댓글<span class="w3-badge w3-white w3-margin-bottom">1</span></a> 
 			</div>
 			</div>
-				
-			
-			
-			
+	
 		</div>
 
 		<div id="boarddetail" class="w3-modal">
-			
-			<div class="w3-modal-content w3-animate-right w3-card-1">
-				<header class="w3-container w3-teal">
+			<div class="w3-modal-content w3-animate-right" th:object="${dto}">
+				<header class="w3-container w3-white">
 					<span                                                                                                                                       
 						onclick="document.getElementById('boarddetail').style.display='none'"
-						class="w3-button w3-display-topleft">&times;</span>
-					<h2 class="w3-center">Modal Header</h2>
+						class="w3-button w3-display-top"><i class="fas fa-arrow-left"></i></span>
+						<div class="w3-button w3-display-topright" style="right:7.5em;"><i class="fas fa-share-alt"></i></div>
+						<div class="w3-button w3-display-topright" style="right:4em;" th:onclick="|updateBoard(${dto?.board_num});|"><i class="fas fa-edit"></i></div>
+						<div class="w3-button w3-display-topright" style="right:1em;" th:onclick="|deleteBoard(${dto?.board_num});|"><i class="fas fa-trash-alt"></i></div>
+						<div class="w3-panel w3-topbar">	
+						</div>
+						<div class="w3-panel w3-border-bottom" >
+							<span style="font-size: 3em;">
+								<i class="far fa-user"></i>
+							</span>
+							<span class="w3-text-dark-gray">
+								<span style="bottom:1.8em; font-weight:bold;" th:text="${dto?.member_id} + '(' + ${dto?.member_nickname} + ')'"></span>
+								<span style="right:6.9em;" th:text="${dto?.board_date}"></span>
+							</span>
+						</div>
+						<div th:text="${dto?.board_content}" class="w3-panel w3-large w3-margin-bottom"></div>
+						<br/>
+						<div class="w3-panel w3-border-top w3-border-bottom ">
+						    <br/>
+							<a href="#" style="text-decoration: none;"><i class="far fa-thumbs-up"></i> 추천하기</a>	
+							<a href="#" style="text-decoration: none;"><i class="far fa-comment"></i> 댓글 <span class="w3-badge w3-white w3-margin-bottom">1</span></a> 
+						</div>
+						
 				</header>
 				<div class="w3-container">
-					<div th:object="${dto}">
-						<input type="text" th:value="${dto?.board_num}"> 
-						<input type="text" th:value="${dto?.com_num}"> 
-						<input type="text" th:value="${dto?.member_num}"> 
-						<input type="text" th:value="${dto?.board_title}"> 
-						<input type="text" th:value="${dto?.member_nickname}"> 
-						<input type="text" th:value="${dto?.member_id}"> 
-						<input type="text" th:value="${dto?.board_content}"> 
-						<input type="text" th:value="${dto?.board_date}"> 
-						<input type="button" value="수정하기"	th:onclick="|updateBoard(${dto?.board_num});|"> 
-						<input type="button" value="삭제하기"	th:onclick="|deleteBoard(${dto?.board_num});|">
-					</div>
+
 
 					<div>
 						<h3>임시 게시글 등록 영역</h3>

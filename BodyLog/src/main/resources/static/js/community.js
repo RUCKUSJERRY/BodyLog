@@ -1,3 +1,13 @@
+//const boarddetail = document.getElementById("boarddetail");
+//
+//window.onclick = function(event) {
+//	  if (event.target == boarddetail) {
+//		  boarddetail.style.display = "none";
+//	  }
+//	}
+
+
+
 // 우선 커뮤니티 메인을 접속하면 게시글 전체를 리스팅 해준다.
 $(function(){
 	
@@ -15,8 +25,9 @@ function selectCommunity() {
 		contentType: "application/json; charset=utf-8",
 		method : "POST",
 		success: function(data) {
-			$("#comarea").replaceWith(data);
 			console.log(data)
+			$("#comarea").replaceWith(data);
+			
 		},error: function(e) {
 			console.log(e)
 		}
@@ -39,7 +50,7 @@ function selectListAllBoard(comname) {
 			$("#boardarea").replaceWith(data);
 			$("#comname").text(comname + " ");
 			$("#comname").append('<i class="fas fa-chevron-down">');
-			var x = document.getElementById("comDrop");
+			const x = document.getElementById("comDrop");
 			    x.className = x.className.replace(" w3-show", "");
 			console.log(name);
 			
@@ -66,7 +77,7 @@ function selectListBoard(com_num, comname) {
 			$("#boardarea").replaceWith(data);
 			$("#comname").text(comname + " ");
 			$("#comname").append('<i class="fas fa-chevron-down">');
-			var x = document.getElementById("comDrop");
+			const x = document.getElementById("comDrop");
 		    x.className = x.className.replace(" w3-show", "");
 			
 		},error: function(e) {
@@ -140,14 +151,14 @@ function updateBoardRes() {
 	
 	function getParameterValues() {
 		
-		var board_num = $("#update_board_num").val();
-		var com_num = $("#update_com_num").val();
-		var member_num = $("#update_member_num").val();
-		var board_title = $("#update_board_title").val();
-		var member_nickname = $("#update_member_nickname").val(); 
-		var member_id = $("#update_member_id").val();
-		var board_content = $("#update_board_content").val(); 
-		var board_date = $("#update_board_date").val();
+		const board_num = $("#update_board_num").val();
+		const com_num = $("#update_com_num").val();
+		const member_num = $("#update_member_num").val();
+		const board_title = $("#update_board_title").val();
+		const member_nickname = $("#update_member_nickname").val(); 
+		const member_id = $("#update_member_id").val();
+		const board_content = $("#update_board_content").val(); 
+		const board_date = $("#update_board_date").val();
 		
 		
 		return "?board_num="+board_num+
@@ -192,11 +203,26 @@ function deleteBoard(board_num) {
 
 
 // ------------------------------------------------------------
-function myFunction() {
-	  var x = document.getElementById("comDrop");
+function comDrop() {
+	  const x = document.getElementById("comDrop");
 	  if (x.className.indexOf("w3-show") == -1) { 
 	    x.className += " w3-show";
 	  } else {
 	    x.className = x.className.replace(" w3-show", "");
 	  }
 	}
+
+function boarddetailDrop() {
+	  const x = document.getElementById("boarddetailDrop");
+	  if (x.className.indexOf("w3-show") == -1) { 
+	    x.className += " w3-show";
+	  } else {
+	    x.className = x.className.replace(" w3-show", "");
+	  }
+	}	
+
+
+	
+
+
+
